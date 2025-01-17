@@ -3,7 +3,6 @@
 
 import { defineConfig } from '#q-app/wrappers';
 import { fileURLToPath } from 'node:url';
-import path from 'path';
 
 export default defineConfig((ctx) => {
   return {
@@ -36,19 +35,19 @@ export default defineConfig((ctx) => {
       // 'themify',
       // 'line-awesome',
       // 'roboto-font-latin-ext', // this or either 'roboto-font', NEVER both!
-
       'roboto-font', // optional, you are not bound to it
       'material-icons', // optional, you are not bound to it
     ],
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#build
     build: {
-      // tsconfig.jsonのcompilerOptions/pathsに追加したエイリアスは、viteにも追加する必要がある
-      // Quasar標準のエイリアスは追加する必要がない。
       // https://quasar.dev/quasar-cli-vite/handling-vite#adding-folder-aliases
       alias: {
-        i18n: path.resolve(__dirname, './src/i18n'),
-        ui: path.resolve(__dirname, './src/ui'),
+        i18n: fileURLToPath(new URL('./src/i18n', import.meta.url)),
+        ui: fileURLToPath(new URL('./src/ui', import.meta.url)),
+        assets: fileURLToPath(new URL('./src/assets', import.meta.url)),
+        boot: fileURLToPath(new URL('./src/boot', import.meta.url)),
+        stores: fileURLToPath(new URL('./src/stores', import.meta.url)),
       },
 
       target: {
@@ -124,7 +123,7 @@ export default defineConfig((ctx) => {
       config: {},
 
       // iconSet: 'material-icons', // Quasar icon set
-      // lang: 'en-US', // Quasar language pack
+      lang: 'ja', // Quasar language pack
 
       // For special cases outside of where the auto-import strategy can have an impact
       // (like functional components as one of the examples),

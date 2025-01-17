@@ -9,31 +9,18 @@
     "module": "ESNext",
     "target": "ESNext",
     "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "strict": true,
     "paths": {
       "src/*": ["src/*"],
       "app/*": ["*"],
-      "components/*": ["src/components/*"],
-      "layouts/*": ["src/layouts/*"],
-      "pages/*": ["src/pages/*"],
       "assets/*": ["src/assets/*"],
       "boot": ["src/boot"],
       "boot/*": ["src/boot/*"],
       "stores": ["src/stores"],
       "stores/*": ["src/stores/*"],
-      // "domain": ["src/domain"],
-      // "domain/*": ["src/domain/*"],
       "i18n": ["src/i18n"],
       "i18n/*": ["src/i18n/*"],
-      // "gateways": ["src/gateways"],
-      // "gateways/*": ["src/gateways/*"],
-      // "interactors": ["src/interactors"],
-      // "interactors/*": ["src/interactors/*"],
-      // "presenters": ["src/presenters"],
-      // "presenters/*": ["src/presenters/*"],
-      // "repository": ["src/repository"],
-      // "repository/*": ["src/repository/*"],
-      // "test/": ["src/test/"],
-      // "test/*": ["src/test/*"],
       "ui": ["src/ui"],
       "ui/*": ["src/ui/*"],
       "#q-app": ["./node_modules/@quasar/app-vite/types/index.d.ts"],
@@ -42,5 +29,7 @@
       "#q-app/bex/content": ["./node_modules/@quasar/app-vite/types/bex/entrypoints/content.d.ts"],
       "#q-app/bex/private/bex-bridge": ["./node_modules/@quasar/app-vite/types/bex/bex-bridge.d.ts"]
     }
-  }
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "eslint.config.js", "quasar.config.ts"],
+  "exclude": ["node_modules"]
 }

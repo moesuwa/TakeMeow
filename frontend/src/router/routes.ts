@@ -2,9 +2,9 @@ import type { RouteRecordRaw } from 'vue-router';
 
 const routes: RouteRecordRaw[] = [
   {
+    name: 'mainMenu',
     path: '/',
-    component: () => import('ui/templates/MainLayout.vue'),
-    children: [{ path: '', component: () => import('ui/pages/IndexPage.vue') }],
+    component: () => import('ui/pages/mainMenu/page.vue'),
   },
 
   // Always leave this as last one,
