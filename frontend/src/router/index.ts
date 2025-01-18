@@ -1,3 +1,4 @@
+import process from 'process';
 import { createMemoryHistory, createRouter, createWebHashHistory, createWebHistory } from 'vue-router';
 import routes from './routes';
 import { defineRouter } from '#q-app/wrappers';

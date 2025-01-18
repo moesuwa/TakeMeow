@@ -11,18 +11,23 @@
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
     "strict": true,
+    "noEmit": true,
     "paths": {
       "src/*": ["src/*"],
       "app/*": ["*"],
       "assets/*": ["src/assets/*"],
       "boot": ["src/boot"],
       "boot/*": ["src/boot/*"],
+      "public": ["src/public"],
+      "public/*": ["src/public/*"],
       "stores": ["src/stores"],
       "stores/*": ["src/stores/*"],
       "test": ["src/test"],
       "test/*": ["src/test/*"],
       "i18n": ["src/i18n"],
       "i18n/*": ["src/i18n/*"],
+      "presenters": ["src/presenters"],
+      "presenters/*": ["src/presenters/*"],
       "ui": ["src/ui"],
       "ui/*": ["src/ui/*"],
       "#q-app": ["./node_modules/@quasar/app-vite/types/index.d.ts"],
@@ -32,6 +37,6 @@
       "#q-app/bex/private/bex-bridge": ["./node_modules/@quasar/app-vite/types/bex/bex-bridge.d.ts"]
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "eslint.config.js", "quasar.config.ts"],
+  "include": ["src/**/*", "./quasar.config.ts"],
   "exclude": ["node_modules"]
 }

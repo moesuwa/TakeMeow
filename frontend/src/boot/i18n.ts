@@ -1,6 +1,6 @@
 import { boot } from 'quasar/wrappers';
-import { createI18n } from 'vue-i18n';
 import messages from 'i18n';
+import { createI18n } from 'vue-i18n';
 
 const i18n = createI18n({
   legacy: false,
@@ -23,7 +23,6 @@ export default boot(({ app }) => {
 // 初期化中のawait処理の後で呼び出すとエラーとなる。
 // それは不便なので、どこからでも呼び出せるよう事前定義にしておく。
 export function useI18n() {
-  // eslint-disable-next-line @typescript-eslint/unbound-method
   const { t, te, d, n, ...globalApi } = i18n.global;
 
   return {

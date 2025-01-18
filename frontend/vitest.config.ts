@@ -12,7 +12,10 @@ export default defineConfig({
       { find: 'stores', replacement: resolve(__dirname, 'src/stores') },
       { find: 'i18n', replacement: resolve(__dirname, 'src/i18n') },
       { find: 'ui', replacement: resolve(__dirname, 'src/ui') },
+      { find: 'assets', replacement: resolve(__dirname, 'src/assets') },
+      { find: 'presenters', replacement: resolve(__dirname, 'src/presenters') },
       { find: 'test', replacement: resolve(__dirname, 'src/test') },
+      { find: 'public', replacement: resolve(__dirname, 'src/public') },
     ],
   },
 });

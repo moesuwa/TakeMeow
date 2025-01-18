@@ -3,8 +3,8 @@
 // 実行するには、frontendのルートディレクトリで「yarn test」を実行する。
 
 // import { createPinia } from 'pinia';
-import { test, expect } from 'vitest';
 import { printCatProfileMessage, CatProfile /** useCatsMealsCalculator */ } from 'test/README/sampleTest';
+import { test, expect } from 'vitest';
 
 // テストに使用する際、storeのインポートはVueファイルとは異なる
 // const pinia = createPinia();

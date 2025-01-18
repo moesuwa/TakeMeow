@@ -5,11 +5,13 @@
   "editor.tabSize": 2,
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
+  "editor.linkedEditing": true,
   "editor.codeActionsOnSave": ["source.fixAll.eslint"],
   "eslint.validate": ["javascript", "javascriptreact", "typescript", "vue"],
   "eslint.workingDirectories": ["./frontend"],
   "typescript.tsdk": "./frontend/node_modules/typescript/lib",
   "prettier.configPath": "./frontend/.prettierrc",
+  "eslint.useFlatConfig": true,
   "markdown.extension.toc.levels": "2..6",
   "markdown.preview.breaks": true,
   "git.ignoreLimitWarning": true,
@@ -26,11 +28,6 @@
     "**/package-lock.json",
     "**/yarn.lock",
     "**/node_modules",
-    "vscode-extension",
-    ".git/objects",
-    ".vscode",
-    ".vscode-insiders",
-    "dhs.code-workspace",
     "**/quasar.conf.js"
   ],
   "attrsSorter.order": [
@@ -89,23 +86,9 @@
       "backgroundColor": "blue"
     }
   ],
-  "todohighlight.include": [
-    "**/*.js",
-    "**/*.jsx",
-    "**/*.ts",
-    "**/*.tsx",
-    "**/*.html",
-    "**/*.php",
-    "**/*.css",
-    "**/*.scss",
-    "**/*.vue",
-    "**/*.styl"
-  ],
+  "todohighlight.include": ["**/*.ts", "**/*.css", "**/*.scss", "**/*.vue"],
   "[markdown]": {
     "editor.defaultFormatter": "yzhang.markdown-all-in-one"
-  },
-  "[yaml]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "markdownlint.config": {
     "MD033": {
