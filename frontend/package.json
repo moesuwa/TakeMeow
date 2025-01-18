@@ -9,10 +9,11 @@
   "scripts": {
     "lint": "eslint -c ./eslint.config.js \"./src*/**/*.{ts,js,cjs,mjs,vue}\"",
     "format": "prettier --write \"**/*.{js,ts,vue,scss,html,md,json}\" --ignore-path .gitignore",
-    "test": "echo \"No test specified\" && exit 0",
+    "ts-check": "vue-tsc --noEmit",
+    "test": "vitest",
     "dev": "quasar dev",
     "build": "quasar build",
-    "postinstall": "quasar prepare"
+    "verify": "npm-run-all --parallel lint ts-check"
   },
   "dependencies": {
     "@quasar/extras": "^1.16.4",
@@ -38,9 +39,11 @@
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-vue": "^9.32.0",
     "globals": "^15.12.0",
+    "npm-run-all": "^4.1.5",
     "prettier": "^3.3.3",
     "typescript": "~5.5.3",
     "vite-plugin-checker": "^0.8.0",
+    "vitest": "^3.0.2",
     "vue-eslint-parser": "^9.4.3",
     "vue-tsc": "^2.0.29"
   },
