@@ -1,7 +1,4 @@
-// This is just an example,
-// so you can safely delete all default props below
-
+import { testSample } from './testSample';
 export default {
-  failed: 'Action failed',
-  success: 'Action was successful'
+  testSample: testSample,
 };
