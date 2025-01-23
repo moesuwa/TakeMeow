@@ -1,1 +1,65 @@
 // app global css in SCSS form
+
+$small-margin: 0.5rem;
+$default-margin: 1rem;
+$large-margin: 4.5rem;
+
+$picture-width: 300px;
+$picture-height: 400px;
+$app-size: 140px;
+
+@mixin full-size {
+  width: 100%;
+  height: 100%;
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-start {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+@mixin full-size-flex-center {
+  @include full-size;
+  @include flex-center;
+}
+
+@mixin calc-margin-full-size($margin) {
+  width: calc(100% - #{$margin * 2});
+  height: calc(100% - #{$margin * 2});
+  margin: $margin;
+}
+
+@mixin margin-full-size-flex-center($margin) {
+  @include calc-margin-full-size($margin);
+  @include flex-center;
+}
+
+@mixin title-text {
+  font-size: 6rem;
+  font-weight: bold;
+  color: white;
+}
+
+@mixin default-text {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+.default-text {
+  @include default-text;
+}
+
+@mixin default-border {
+  border-radius: 20px;
+}
+
+@mixin background-clear-white {
+  background-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}

@@ -1,13 +1,15 @@
 import { dirname } from 'path'; // dirnameをインポート
+import process from 'process'; // processをインポート
 import { fileURLToPath } from 'url'; // fileURLToPathをインポート
 import js from '@eslint/js';
 import pluginQuasar from '@quasar/app-vite/eslint';
 import typescriptEslint from '@typescript-eslint/eslint-plugin';
+import typescriptEslintPlugin from '@typescript-eslint/eslint-plugin';
 import typescriptEslintParser from '@typescript-eslint/parser';
 import prettierSkipFormatting from '@vue/eslint-config-prettier/skip-formatting';
 import importPlugin from 'eslint-plugin-import';
 import pluginVue from 'eslint-plugin-vue';
-import globals from 'globals';
+import vuePlugin from 'eslint-plugin-vue';
 import vueEslintParser from 'vue-eslint-parser';
 
 // __dirnameの代わりに使う方法
@@ -25,28 +27,14 @@ export default [
 
   {
     languageOptions: {
-      ecmaVersion: 'latest',
-      sourceType: 'module',
-
       // TypeScript用のパーサーを指定
       parserOptions: {
-        parser: [vueEslintParser, typescriptEslintParser],
+        sourceType: 'module',
+        ecmaVersion: 2020,
+        parser: typescriptEslintParser,
         tsconfigRootDir: __dirname, // __dirnameを使ってカレントディレクトリを指定
         project: './tsconfig.json', // tsconfig.jsonを指定
-        extraFileExtensions: ['.vue'],
-      },
-
-      globals: {
-        ga: 'readonly', // Google Analytics
-        cordova: 'readonly',
-        __statics: 'readonly',
-        __QUASAR_SSR__: 'readonly',
-        __QUASAR_SSR_SERVER__: 'readonly',
-        __QUASAR_SSR_CLIENT__: 'readonly',
-        __QUASAR_SSR_PWA__: 'readonly',
-        process: 'readonly',
-        Capacitor: 'readonly',
-        chrome: 'readonly',
+        extraFileExtensions: ['.vue', '.ts'], // Vueファイルに対応
       },
     },
 
@@ -57,31 +45,25 @@ export default [
     },
 
     rules: {
+      ...typescriptEslintPlugin.configs.recommended.rules, // TypeScript 用の推奨ルール
+      ...vuePlugin.configs['vue3-recommended'].rules, // Vue 3 用の推奨ルール
       'prefer-promise-reject-errors': 'off',
-
       quotes: ['warn', 'single', { avoidEscape: true }],
-
       // this rule, if on, would require explicit return type on the `render` function
       '@typescript-eslint/explicit-function-return-type': 'off',
-
       // in plain CommonJS modules, you can't use `import foo = require('foo')` to pass this rule, so it has to be disabled
       '@typescript-eslint/no-var-requires': 'off',
-
       // The core 'no-unused-vars' rules (in the eslint:recommended rule set)
       // does not work with type definitions
       'no-unused-vars': 'off',
       '@typescript-eslint/no-unused-vars': 'off',
-
       // allow debugger during development only
       'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-
       // `definition for rule 'vue/valid-attribute-name' was not found`というエラーが出るため無効化（eslint-plugin-vue@9.8.0）
       'vue/valid-attribute-name': 'off',
-
       // consoleの使用の警告。ただし、info, warn, error, assertは許可
       // 主にconsole.logに対して警告する。
       'no-console': ['warn', { allow: ['info', 'warn', 'error', 'assert'] }],
-
       // vueファイルのタグの属性の順序ルール
       'vue/component-tags-order': [
         'error',
@@ -89,7 +71,6 @@ export default [
           order: ['script', 'template', 'style'],
         },
       ],
-
       // テンプレート内のコンポーネント名のケバブケースルール
       'vue/component-name-in-template-casing': [
         'error',
@@ -99,7 +80,6 @@ export default [
           ignores: [],
         },
       ],
-
       // 自己終了タグのルール
       'vue/html-self-closing': [
         'error',
@@ -113,7 +93,6 @@ export default [
           math: 'always',
         },
       ],
-
       // import禁止ルール
       '@typescript-eslint/no-restricted-imports': [
         'error',
@@ -131,7 +110,6 @@ export default [
           ],
         },
       ],
-
       // import順序ルール
       'import/order': [
         'error',
@@ -142,44 +120,26 @@ export default [
           alphabetize: { order: 'asc', caseInsensitive: true },
           pathGroups: [
             // テストユーティリティは最初にimportする必要があるので、特別にbuiltinかつその最上位に配置する
+            { pattern: 'test', group: 'builtin', position: 'before' },
             { pattern: 'test/utils', group: 'builtin', position: 'before' },
             { pattern: 'quasar', group: 'builtin', position: 'before' },
             { pattern: 'quasar/**', group: 'builtin', position: 'before' },
             { pattern: 'vue', group: 'builtin', position: 'before' },
             { pattern: 'vue/**', group: 'builtin', position: 'before' },
-            { pattern: 'domain', group: 'internal', position: 'before' },
-            { pattern: 'domain/**', group: 'internal', position: 'before' },
             { pattern: 'boot', group: 'internal', position: 'before' },
             { pattern: 'boot/**', group: 'internal', position: 'before' },
-            { pattern: 'interactors', group: 'internal', position: 'before' },
-            { pattern: 'interactors/**', group: 'internal', position: 'before' },
-            { pattern: 'gateways', group: 'internal', position: 'before' },
-            { pattern: 'gateways/**', group: 'internal', position: 'before' },
-            { pattern: 'repository', group: 'internal', position: 'before' },
-            { pattern: 'repository/**', group: 'internal', position: 'before' },
+            { pattern: 'public', group: 'internal', position: 'before' },
+            { pattern: 'public/**', group: 'internal', position: 'before' },
             { pattern: 'presenters', group: 'internal', position: 'before' },
             { pattern: 'presenters/**', group: 'internal', position: 'before' },
             { pattern: 'stores', group: 'internal', position: 'before' },
             { pattern: 'stores/**', group: 'internal', position: 'before' },
-            { pattern: 'ui/components', group: 'internal', position: 'before' },
-            { pattern: 'ui/components/atoms', group: 'internal', position: 'before' },
-            { pattern: 'ui/components/atoms/**', group: 'internal', position: 'before' },
-            { pattern: 'ui/components/molecules', group: 'internal', position: 'before' },
-            { pattern: 'ui/components/molecules/**', group: 'internal', position: 'before' },
-            { pattern: 'ui/components/organisms', group: 'internal', position: 'before' },
-            { pattern: 'ui/components/organisms/**', group: 'internal', position: 'before' },
-            { pattern: 'ui/atoms', group: 'internal', position: 'before' },
-            { pattern: 'ui/atoms/**', group: 'internal', position: 'before' },
-            { pattern: 'ui/molecules', group: 'internal', position: 'before' },
-            { pattern: 'ui/molecules/**', group: 'internal', position: 'before' },
-            { pattern: 'ui/organisms', group: 'internal', position: 'before' },
-            { pattern: 'ui/organisms/**', group: 'internal', position: 'before' },
-            { pattern: 'ui/pages', group: 'internal', position: 'before' },
-            { pattern: 'ui/pages/**', group: 'internal', position: 'before' },
-            { pattern: 'ui/templates', group: 'internal', position: 'before' },
-            { pattern: 'ui/templates/**', group: 'internal', position: 'before' },
             { pattern: 'ui', group: 'internal', position: 'before' },
             { pattern: 'ui/**', group: 'internal', position: 'before' },
+            { pattern: 'ui/components', group: 'internal', position: 'before' },
+            { pattern: 'ui/components/**', group: 'internal', position: 'before' },
+            { pattern: 'ui/pages', group: 'internal', position: 'before' },
+            { pattern: 'ui/pages/**', group: 'internal', position: 'before' },
           ],
         },
       ],
@@ -194,7 +154,7 @@ export default [
     },
   },
   {
-    files: ['src/**/page.vue'],
+    files: ['src/**/page.vue', 'src/**/layout.vue', 'src/**/dashboard.vue'],
     rules: {
       'vue/multi-word-component-names': 'off',
     },

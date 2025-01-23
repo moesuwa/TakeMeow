@@ -48,6 +48,8 @@ export default defineConfig((ctx) => {
         assets: fileURLToPath(new URL('./src/assets', import.meta.url)),
         boot: fileURLToPath(new URL('./src/boot', import.meta.url)),
         stores: fileURLToPath(new URL('./src/stores', import.meta.url)),
+        presenters: fileURLToPath(new URL('./src/presenters', import.meta.url)),
+        public: fileURLToPath(new URL('./src/public', import.meta.url)),
       },
 
       target: {
@@ -115,7 +117,8 @@ export default defineConfig((ctx) => {
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#devserver
     devServer: {
       // https: true,
-      open: true, // opens browser window automatically
+      open: false, // opens browser window automatically
+      port: 8080,
     },
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#framework
